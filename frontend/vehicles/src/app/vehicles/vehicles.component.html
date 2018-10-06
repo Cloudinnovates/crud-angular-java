@@ -1,19 +1,28 @@
 <div style="margin-top: 30px;margin-left: 5%;margin-right: 5%;">
-    <p-table id="vehiclesTable" [value]="listVehicles">
+    <p-table #dt id="vehiclesTable" [columns]="columns" [value]="listVehicles">
         <ng-template pTemplate="header">
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Type</th>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                {{col.header}}
+                 <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+            </th>
             </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-vehicle>
             <tr>
+            <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                <input *ngSwitchCase="'idVehicle'" pInputText type="number" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" style="width: 5em;">
+                <input *ngSwitchCase="'name'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" >
+                <p-dropdown *ngSwitchCase="'type'" [options]="typesDropdown" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"   ></p-dropdown>
+            </th>
+                        </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-vehicle let-columns="columns">
+            <tr [pSelectableRow]="rowData"></tr>
+            <tr align="center"> 
                 <td>{{vehicle.idVehicle}}</td>
                 <td><a [routerLink]="['/vehicle',vehicle.idVehicle]">{{vehicle.name}}</a></td>
                 <td>{{vehicle.type}}</td>
                 <td>
-                    <p-button icon="pi pi-trash" (click)="deleteVehicle(vehicle.idVehicle)" routerLink="/vehicles/all" updataa="vehiclesTable"></p-button>
+                    <p-button icon="pi pi-trash" (click)="deleteVehicle(vehicle.idVehicle)"></p-button>
                 </td>
             </tr>
         </ng-template>

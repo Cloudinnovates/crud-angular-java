@@ -17,6 +17,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CardModule } from 'primeng/card';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import {FileUploadModule} from 'primeng/fileupload';
 
 import { AppRoutingModule } from './/app-routing.module';
 
@@ -34,7 +35,9 @@ import { AppRoutingModule } from './/app-routing.module';
     InputTextModule,
     TabMenuModule,
     AppRoutingModule,
-    InputTextareaModule],
+    InputTextareaModule,
+    FileUploadModule
+  ],
   declarations: [
     AppComponent,
     VehicleComponent,

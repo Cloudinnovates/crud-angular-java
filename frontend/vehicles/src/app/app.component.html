@@ -1,8 +1,10 @@
-<h1>Vehicles</h1>
-<p>
-	See my fantastic collection of vehicles
-</p>
-
-<p-tabMenu [model]="items" [activeItem]="items[0]"></p-tabMenu>
-
-<router-outlet></router-outlet>
+<div id="titleBar">
+	<h1>Vehicles</h1>
+	<p>
+		See my fantastic collection of vehicles
+	</p>
+</div>
+<div id=tabMenu>
+	<p-tabMenu [model]="items" [activeItem]="items[0]"></p-tabMenu>
+</div>
+<router-outlet id="routerOutler"></router-outlet>

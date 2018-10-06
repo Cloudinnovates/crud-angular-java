@@ -20,9 +20,17 @@ export class VehicleComponent implements OnInit {
 
   vehicle: Vehicle = new Vehicle();
 
-  getVehicle() {
+  editMode: Boolean = false;
 
-    let url = 'https://localhost:8443/vehicles/getAllVehicles';
+  setEditMode(value: Boolean) {
+    this.editMode = value;
+    console.log(this.editMode);
+  }
+
+  getVehicle() {
+    console.log('getVehicle()');
+    //let url = 'https://localhost:8443/vehicles/getAllVehicles';
+    let url = 'assets/vehicles.json';
 
     this.apiService.restItemsServiceGetRestItems(url)
       .subscribe(data => {

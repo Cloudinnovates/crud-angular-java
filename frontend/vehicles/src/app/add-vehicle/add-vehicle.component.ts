@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
 import { VehicleType } from '../vehicle';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-add-vehicle',
@@ -29,7 +29,7 @@ export class AddVehicleComponent implements OnInit {
 
   typeSelected: VehicleType;
 
-  constructor(private http: HttpClient,private router: Router) {
+  constructor(private http: HttpClient, private router: Router) {
     this.typeOfVehicles =
       [{ label: 'Select Type', value: null },
       { label: 'Bike', value: { idVehicleType: 1, name: 'Bike' } },
@@ -37,21 +37,39 @@ export class AddVehicleComponent implements OnInit {
       { label: 'Car', value: { idVehicleType: 3, name: 'Car' } }];
   }
 
-  test(name, description, vehicleType) {
+  addVehicle(name, description, vehicleType) {
     var jsonToPost = '{'
       + '"name" : "' + name + '",'
       + '"description"  : "' + description + '",'
       + '"vehicleType" : ' + JSON.stringify(vehicleType)
+      + '"photo" : "' + this.photo + '"'
       + '}';
 
-    let url = 'https://80.102.242.229:8443/vehicles/addVehicle';
+    console.log(JSON.stringify(jsonToPost));
 
-    this.http.post(url, jsonToPost, httpOptions)
-      .subscribe(data => this.router.navigateByUrl('/vehicles/all'));
+    //let url = 'https://80.102.242.229:8443/vehicles/addVehicle';
+
+    /*this.http.post(url, jsonToPost, httpOptions)
+      .subscribe(data => this.router.navigateByUrl('/vehicles/all'));*/
   }
 
   ngOnInit() {
   }
+
+  photo: any;
+
+  onUpload(event) {
+    var reader = new FileReader();
+    reader.readAsDataURL(event.files[0]);
+    reader.onload = function () {
+      this.photo = reader.result;
+      console.log(this.photo);
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+  }
+
 }
 
 const httpOptions = {

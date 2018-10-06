@@ -1,12 +1,30 @@
-<div style="margin-left: 10%;margin-right: 10%;margin-top: 30px;">
-<p-card title="{{vehicle.name}}" subtitle="{{vehicle.type}}" [style]="" styleClass="ui-card-shadow" >
-    <p-header>
-    </p-header>
-    <div>{{vehicle.description}}</div>
-    <div style="margin-top:30px;margin-right:10%;margin-left:10%"><img style="width:100%;height:100%;object-fit: cover;" src="data:image/jpeg;base64,{{vehicle.photo}}"/></div>
-    <p-footer>
-        <button pButton type="button" label="Go back" icon="" style="margin-right: .25em" 
-        [routerLink]="['/vehicles/all']"></button>
-    </p-footer>
-</p-card>
+<div style="margin-left: 10%;margin-right: 10%;margin-top: 30px;" *ngIf="!editMode">
+    <p-card title="{{vehicle.name}}" subtitle="{{vehicle.type}}" [style]="" styleClass="ui-card-shadow">
+        <p-header>
+        </p-header>
+        <div>{{vehicle.description}}</div>
+        <div style="margin-top:30px;margin-right:10%;margin-left:10%"><img style="width:100%;height:100%;object-fit: cover;"
+                src="data:image/jpeg;base64,{{vehicle.photo}}" /></div>
+        <p-footer>
+            <button pButton type="button" label="Edit" icon="pi pi-pencil" style="margin-right: .25em" (click)="setEditMode(true)"></button>
+            <button pButton type="button" label="Go back" icon="" style="margin-right: .25em" [routerLink]="['/vehicles/all']"
+                icon="pi pi-step-backward"></button>
+        </p-footer>
+    </p-card>
+</div>
+
+<div style="margin-left: 10%;margin-right: 10%;margin-top: 30px;" *ngIf="editMode">
+    <p-card subtitle="{{vehicle.type}}" [style]="" styleClass="ui-card-shadow">
+        <p-header>
+            <input type="text" pInputText [(ngModel)]="vehicle.name" style="width:100%;font-size: 1.5em;font-weight: bold;" />"
+        </p-header>
+        <textarea pInputTextarea [rows]="20" style="width: 100%;" [(ngModel)]="vehicle.description"></textarea>
+        <div style="margin-top:30px;margin-right:10%;margin-left:10%"><img style="width:100%;height:100%;object-fit: cover;"
+                src="data:image/jpeg;base64,{{vehicle.photo}}" /></div>
+        <p-footer>
+            <button pButton type="button" label="Go back" style="margin-right: .25em" [routerLink]="['/vehicles/all']"
+                icon="pi pi-step-backward"></button>
+            <button pButton type="button" label="Save" icon="pi pi-save" style="margin-right: .25em" (click)="setEditMode(false)"></button>           
+        </p-footer>
+    </p-card>
 </div>

@@ -1,8 +1,11 @@
-{
-  "idVehicle": 1,
-  "name": "Ford",
-  "vehicleType": {
-    "idType": 1,
-    "type": "Car"
-  } 
-}
+[
+  {
+    "idVehicle": 1,
+    "name": "Ford",
+    "description": "The limited-edition 2018 Focus RS comes with modifications inspired by the enthusiast community. Unique to the 2018 model – black mirror caps and black spoiler with new RS decal, interior carbon fiber accents, RS wheel center caps with standard forged wheels, and the now standard RECARO® leather-trimmed heated seats, heated mirrors and steering wheel and voice-activated navigation. In response to popular demand, the RS is now available in Race Red. This best-in-class 350-horsepower 68  hatchback has taken full advantage of its 2.3L EcoBoost® engine performance. The global Ford Performance team developed a standard mechanical Quaife® Limited Slip Differential for the front axle which further improves the 2018 Focus RS performance vs the 2017 Focus RS. By controlling the torque delivered to each front wheel, the 2018 Focus RS Quaife LSD enables drivers to fully exploit the engine's power. The system limits the engine torque delivered to a particular front wheel that has reduced traction on the road surface, and redistributes torque to the wheel with more traction to counteract the wheel spin that can hamper acceleration and stability. And with four different driving modes, including  Track and Drift 68 , you can dominate the course no matter the mood you're in.",
+    "vehicleType": {
+      "idType": 1,
+      "type": "Car"
+    }
+  }
+]

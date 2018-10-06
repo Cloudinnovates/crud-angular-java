@@ -1,3 +1,7 @@
 /* Add application styles & imports to this file! */
 
-body {background-color: #ccffff !important;}
+body {
+    background-color: rgb(230, 243, 255);
+    margin:0px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

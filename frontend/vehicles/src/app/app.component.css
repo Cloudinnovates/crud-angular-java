@@ -1,7 +1,21 @@
-p {
-  font-family: Lato;
+#titleBar{
+  background-color: rgb(51, 153, 255);
+  color: white;
+  padding-left:50px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  top:0px;
 }
 
-h1{
-  font-family: Lato;
+
+#tabMenu{
+  background-color: rgb(51, 153, 255);
+}
+
+#titleBar h1{
+  font-size: 5em;
+}
+
+#titleBar p{
+  font-size: 2em;
 }
