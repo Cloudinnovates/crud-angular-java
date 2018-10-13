@@ -6,32 +6,39 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name="vehicle")
-public class Vehicle{
-	
+@Table(name = "vehicle")
+public class Vehicle {
+
 	@Id
-	@Column(name="idvehicle")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "idvehicle")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int idVehicle;
-	
-	@Column(name="name")
-	String name;	
-	
-	@Column(name="description")
+
+	@Column(name = "name")
+	String name;
+
+	@Column(name = "description")
 	String description;
 
+	@Column(name = "photob64")
+	String photoB64;
+
 	@ManyToOne
-	@JoinColumn(name="idvehicletype")
+	@JoinColumn(name = "idvehicletype")
 	VehicleType vehicleType;
-	
+
 	public Vehicle() {
-		
+
 	}
-	
+
 	public Vehicle(int idVehicle, String name, String description) {
 		super();
 		this.idVehicle = idVehicle;
@@ -65,7 +72,7 @@ public class Vehicle{
 
 	@Override
 	public String toString() {
-		return "Vehicle [idVehicle=" + idVehicle + ", name=" + name + ", type="+ vehicleType.getType() +"]";
+		return "Vehicle [idVehicle=" + idVehicle + ", name=" + name + ", type=" + vehicleType.getType() + "]";
 	}
 
 	public VehicleType getVehicleType() {
@@ -75,6 +82,12 @@ public class Vehicle{
 	public void setVehicleType(VehicleType vehicleType) {
 		this.vehicleType = vehicleType;
 	}
-	
-	
+
+	public String getPhotoB64() {
+		return photoB64;
+	}
+
+	public void setPhotoB64(String photoB64) {
+		this.photoB64 = photoB64;
+	}
 }

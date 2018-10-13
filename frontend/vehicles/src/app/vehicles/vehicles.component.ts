@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterContentInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Vehicle } from '../vehicle';
 import { ApiService } from '../api.service';
 import { ActivatedRoute } from '@angular/router';
@@ -39,8 +39,8 @@ export class VehiclesComponent implements OnInit {
 
   getVehicles() {
     console.log('getVehicles() called');
-    //    let url = 'https://localhost:8443/vehicles/getAllVehicles';
-    let url = 'assets/vehicles.json';
+    let url = 'https://localhost:8443/vehicles/getAllVehicles';
+//    let url = 'assets/vehicles.json';
 
     this.apiService.restItemsServiceGetRestItems(url)
       .subscribe(data => {
@@ -59,8 +59,7 @@ export class VehiclesComponent implements OnInit {
 
   deleteVehicle(vehicleId) {
     this.apiService.restItemsServiceGetRestItems('https://localhost:8443/vehicles/deleteVehicle/' + vehicleId)
-      .subscribe(data => console.log("vehicle deleted"));
-    this.getVehicles();
+      .subscribe(data => this.getVehicles());
   }
 
   columns: any[];

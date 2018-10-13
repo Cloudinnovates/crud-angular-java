@@ -4,7 +4,7 @@
         </p-header>
         <div>{{vehicle.description}}</div>
         <div style="margin-top:30px;margin-right:10%;margin-left:10%"><img style="width:100%;height:100%;object-fit: cover;"
-                src="data:image/jpeg;base64,{{vehicle.photo}}" /></div>
+                src="{{vehicle.photo}}" /></div>
         <p-footer>
             <button pButton type="button" label="Edit" icon="pi pi-pencil" style="margin-right: .25em" (click)="setEditMode(true)"></button>
             <button pButton type="button" label="Go back" icon="" style="margin-right: .25em" [routerLink]="['/vehicles/all']"
@@ -20,7 +20,7 @@
         </p-header>
         <textarea pInputTextarea [rows]="20" style="width: 100%;" [(ngModel)]="vehicle.description"></textarea>
         <div style="margin-top:30px;margin-right:10%;margin-left:10%"><img style="width:100%;height:100%;object-fit: cover;"
-                src="data:image/jpeg;base64,{{vehicle.photo}}" /></div>
+                src="{{vehicle.photo}}" /></div>
         <p-footer>
             <button pButton type="button" label="Go back" style="margin-right: .25em" [routerLink]="['/vehicles/all']"
                 icon="pi pi-step-backward"></button>

@@ -1,9 +1,12 @@
 package com.lorenzolerate.dao;
 
+import java.sql.Blob;
+import java.util.Base64;
 import java.util.List;
 
 import com.lorenzolerate.model.Vehicle;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,6 +23,7 @@ public class VehicleDAO {
 		this.sessionFactory = sf;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Vehicle> getAllVehicles() {
 		Session session = this.sessionFactory.getCurrentSession();
 		List<Vehicle> vehicleList = session.createQuery("from Vehicle").list();
@@ -28,7 +32,7 @@ public class VehicleDAO {
 
 	public Vehicle getVehicle(int id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Vehicle vehicle = (Vehicle) session.get(Vehicle.class, new Integer(id));
+		Vehicle vehicle = session.get(Vehicle.class, new Integer(id));
 		return vehicle;
 	}
 
@@ -40,12 +44,14 @@ public class VehicleDAO {
 
 	public void updateVehicle(Vehicle vehicle) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.update(vehicle);
+		Vehicle vehicleOld = getVehicle(vehicle.getIdVehicle());
+		vehicleOld.setDescription(vehicle.getDescription());
+		session.update(vehicleOld);
 	}
 
 	public void deleteVehicle(int id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Vehicle p = (Vehicle) session.load(Vehicle.class, new Integer(id));
+		Vehicle p = session.load(Vehicle.class, new Integer(id));
 		if (null != p) {
 			session.delete(p);
 		}
@@ -53,9 +59,9 @@ public class VehicleDAO {
 
 	public List<Vehicle> getVehicleByType(int idVehicleType) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from Vehicle where idVehicleType = :idVehicleType ");
+		Query<Vehicle> query = session.createQuery("from Vehicle where idVehicleType = :idVehicleType ");
 		query.setParameter("idVehicleType", idVehicleType);
 		List<Vehicle> vehicleList = query.list();
 		return vehicleList;
-	}	
+	}
 }

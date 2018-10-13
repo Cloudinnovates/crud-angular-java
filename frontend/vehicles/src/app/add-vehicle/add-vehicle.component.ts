@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
 import { VehicleType } from '../vehicle';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -29,6 +29,8 @@ export class AddVehicleComponent implements OnInit {
 
   typeSelected: VehicleType;
 
+  photo: any;
+
   constructor(private http: HttpClient, private router: Router) {
     this.typeOfVehicles =
       [{ label: 'Select Type', value: null },
@@ -40,28 +42,29 @@ export class AddVehicleComponent implements OnInit {
   addVehicle(name, description, vehicleType) {
     var jsonToPost = '{'
       + '"name" : "' + name + '",'
-      + '"description"  : "' + description + '",'
-      + '"vehicleType" : ' + JSON.stringify(vehicleType)
-      + '"photo" : "' + this.photo + '"'
-      + '}';
+      + '"description" : "' + description + '",'
+      + '"vehicleType" : ' + JSON.stringify(vehicleType);
+      if(this.photo != undefined){
+        jsonToPost += ', "photoB64" : "' + this.photo + '"';
+      }
+      jsonToPost += '}';
 
     console.log(JSON.stringify(jsonToPost));
 
-    //let url = 'https://80.102.242.229:8443/vehicles/addVehicle';
-
-    /*this.http.post(url, jsonToPost, httpOptions)
-      .subscribe(data => this.router.navigateByUrl('/vehicles/all'));*/
+    let url = 'https://localhost:8443/vehicles/addVehicle';
+    
+    console.log(jsonToPost);
+    this.http.post(url, jsonToPost, httpOptions)
+      .subscribe(data => this.router.navigateByUrl('/vehicles/all'));
   }
 
   ngOnInit() {
   }
 
-  photo: any;
-
   onUpload(event) {
     var reader = new FileReader();
     reader.readAsDataURL(event.files[0]);
-    reader.onload = function () {
+    reader.onload = () => {
       this.photo = reader.result;
       console.log(this.photo);
     };

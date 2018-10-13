@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Vehicle } from '../vehicle';
 import { ApiService } from '../api.service';
 import { ActivatedRoute } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-config',
@@ -11,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class VehicleComponent implements OnInit {
 
   @Input('idVehicle') idVehicle: Number = this.activatedRoute.snapshot.params['idVehicle'];
-  constructor(private apiService: ApiService, private activatedRoute: ActivatedRoute) {
+  constructor(private apiService: ApiService, private activatedRoute: ActivatedRoute, private http: HttpClient) {
   }
 
   ngOnInit() {
@@ -23,14 +24,30 @@ export class VehicleComponent implements OnInit {
   editMode: Boolean = false;
 
   setEditMode(value: Boolean) {
+    if (value == false) { //exiting from edit mode
+      this.editVehicle(); //save changes
+    }
     this.editMode = value;
-    console.log(this.editMode);
+  }
+
+  editVehicle() {
+    var jsonToPost = '{'
+      + '"idVehicle" : "' + this.vehicle.idVehicle + '",'
+      + '"name" : "' + this.vehicle.name + '",'
+      + '"description" : "' + this.vehicle.description + '"' + '}';
+
+    console.log(JSON.stringify(jsonToPost));
+
+    let url = 'https://localhost:8443/vehicles/updateVehicle';
+
+    console.log(jsonToPost);
+    this.http.post(url, jsonToPost, httpOptions)
+      .subscribe();
   }
 
   getVehicle() {
-    console.log('getVehicle()');
-    //let url = 'https://localhost:8443/vehicles/getAllVehicles';
-    let url = 'assets/vehicles.json';
+    let url = 'https://localhost:8443/vehicles/getAllVehicles';
+    //let url = 'assets/vehicles.json';
 
     this.apiService.restItemsServiceGetRestItems(url)
       .subscribe(data => {
@@ -40,7 +57,7 @@ export class VehicleComponent implements OnInit {
             this.vehicle.name = vehicleJson['name'];
             this.vehicle.type = vehicleJson['vehicleType']['type'];
             this.vehicle.description = vehicleJson['description'];
-            this.vehicle.photo = vehicleJson['photo'];
+            this.vehicle.photo = vehicleJson['photoB64'];
             break;
           }
         }
@@ -48,3 +65,9 @@ export class VehicleComponent implements OnInit {
   }
 
 }
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  })
+};

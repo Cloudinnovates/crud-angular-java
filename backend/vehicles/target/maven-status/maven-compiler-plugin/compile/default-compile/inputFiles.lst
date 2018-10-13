@@ -1,5 +1,8 @@
-/home/lorenzo/Code/vehicles-app/backend/vehicles/src/main/java/com/lorenzolerate/dao/VehicleDAO.java
-/home/lorenzo/Code/vehicles-app/backend/vehicles/src/main/java/com/lorenzolerate/service/VehicleService.java
-/home/lorenzo/Code/vehicles-app/backend/vehicles/src/main/java/com/lorenzolerate/model/VehicleType.java
-/home/lorenzo/Code/vehicles-app/backend/vehicles/src/main/java/com/lorenzolerate/model/Vehicle.java
-/home/lorenzo/Code/vehicles-app/backend/vehicles/src/main/java/com/lorenzolerate/controller/VehicleController.java
+/home/lorenzo/Software/eclipse-workspace/vehicles/src/main/java/com/lorenzolerate/service/VehicleService.java
+/home/lorenzo/Software/eclipse-workspace/vehicles/src/main/java/com/lorenzolerate/model/Vehicle.java
+/home/lorenzo/Software/eclipse-workspace/vehicles/src/main/java/com/lorenzolerate/controller/VehicleController.java
+/home/lorenzo/Software/eclipse-workspace/vehicles/src/main/java/com/lorenzolerate/model/VehicleType.java
+/home/lorenzo/Software/eclipse-workspace/vehicles/src/main/java/com/lorenzolerate/config/AppInitializer.java
+/home/lorenzo/Software/eclipse-workspace/vehicles/src/main/java/com/lorenzolerate/config/HibernateConfig.java
+/home/lorenzo/Software/eclipse-workspace/vehicles/src/main/java/com/lorenzolerate/config/WebMvcConfig.java
+/home/lorenzo/Software/eclipse-workspace/vehicles/src/main/java/com/lorenzolerate/dao/VehicleDAO.java
